@@ -1,6 +1,11 @@
 const express = require('express')
 const dbConnection = require('../../Model/dbConnection')
+const jwt = require('jsonwebtoken')
+require('dotenv').config();
+// console.log(process.env.SECRET_KEY);
 
+
+const secret_key = process.env.SECRET_KEY;
 const postRoute = express.Router();
 const userModel = dbConnection.userModel
 const userSchema = dbConnection.userSchema
@@ -25,12 +30,16 @@ postRoute.post('/signUp', async (req, res) => {
             else {
                 console.log(req.body);
                 const newUser = new userModel({
-                    userName:req.body.userName,
-                    password:req.body.password
+                    userName: req.body.userName,
+                    password: req.body.password
                 });
                 const save_output = await newUser.save();
-                console.log(save_output);
-                res.status(200).send('You have Signed in Successfully');
+                const token = jwt.sign({ id: save_output._id, userName: save_output.userName, password: save_output.password }, secret_key)
+                res.status(200).json({
+                    token,
+                    save_output,
+                    msg: 'You have Signed in Successfully'
+                });
             }
         } else {
             res.status(404).send('Data Not Recieved');
