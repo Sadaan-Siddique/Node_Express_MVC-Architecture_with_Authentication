@@ -7,8 +7,8 @@ const postRoute = require('./Routes/postRoute');
 const routes_middleWares = express();
 
 //      Middle Wares 
-routes_middleWares.use('/get',getRoute);
-routes_middleWares.use('/post',postRoute);
+routes_middleWares.use('/api',getRoute);
+routes_middleWares.use('/api',postRoute);
 
 routes_middleWares.get('/',(req,res)=>{
     console.log('GET');
