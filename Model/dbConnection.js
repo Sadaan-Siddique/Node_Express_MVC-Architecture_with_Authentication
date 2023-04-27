@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-console.log(process.env.DB_LINK);
+// console.log(process.env.DB_LINK);
 // console.log(process.env.SECRET_KEY);
 
 
@@ -22,10 +22,14 @@ function db() {
 //         Schema Start
 const userSchema = new mongoose.Schema({
     userName: {
-        type: String
+        type: String,
+        required: true,
+        unique: true
     },
     password: {
-        type: String
+        type: String,
+        required: true,
+        unique: true
     }
 })
 //         Schema End

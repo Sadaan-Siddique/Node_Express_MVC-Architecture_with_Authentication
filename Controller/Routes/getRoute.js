@@ -2,6 +2,8 @@ const express = require('express');
 const dbConnection = require('../../Model/dbConnection')
 const getRoute = express.Router();
 
+userModel = dbConnection.userModel 
+userSchema = dbConnection.userSchema
 // console.log(dbConnection);
 
 getRoute.get('/',(req,res)=>{
@@ -10,7 +12,7 @@ getRoute.get('/',(req,res)=>{
 })
 
 getRoute.get('/get_users',async(req,res)=>{
-    const output = await dbConnection.userModel.find({})
+    const output = await userModel.find({})
     console.log(output);
     res.status(200).json({msg:'Users'})
 })
