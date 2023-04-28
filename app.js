@@ -15,11 +15,6 @@ app.use(express.json());
 app.use('/', routes_middleWares)
 
 
-
-
-
-
-
 //     Server Start
 const port = process.env.PORT || 5000;
 app.listen(port, () => {

@@ -1,5 +1,5 @@
 const express = require('express')
-const dbConnection = require('../../Model/dbConnection')
+const userSchema = require('../../Model/userSchema')
 const jwt = require('jsonwebtoken')
 require('dotenv').config();
 // console.log(process.env.SECRET_KEY);
@@ -7,8 +7,7 @@ require('dotenv').config();
 
 const secret_key = process.env.SECRET_KEY;
 const postRoute = express.Router();
-const userModel = dbConnection.userModel
-const userSchema = dbConnection.userSchema
+const userModel = userSchema.userModel;
 
 
 postRoute.post('/', (req, res) => {

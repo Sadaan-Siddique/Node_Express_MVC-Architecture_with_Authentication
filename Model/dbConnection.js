@@ -1,6 +1,6 @@
 //         Requires
 const mongoose = require('mongoose');
-require('dotenv').config();
+require('dotenv').config();     
 
 // console.log(process.env.DB_LINK);
 // console.log(process.env.SECRET_KEY);
@@ -19,27 +19,27 @@ function db() {
     //         DB Connection End
 
 }
-//         Schema Start
-const userSchema = new mongoose.Schema({
-    userName: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    password: {
-        type: String,
-        required: true,
-        unique: true
-    }
-})
-//         Schema End
+// //         Schema Start
+// const userSchema = new mongoose.Schema({
+//     userName: {
+//         type: String,
+//         required: true,
+//         unique: true
+//     },
+//     password: {
+//         type: String,
+//         required: true,
+//         unique: true
+//     }
+// })
+// //         Schema End
 
 //         Model Start
-const userModel = new mongoose.model('jwt_users', userSchema);
+// const userModel = new mongoose.model('jwt_users', userSchema);
 //         Model End
 
 module.exports = {
     db,
-    userSchema,
-    userModel
+    // userSchema,
+    // userModel
 };
