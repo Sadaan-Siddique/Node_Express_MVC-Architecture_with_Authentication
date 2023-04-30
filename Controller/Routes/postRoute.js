@@ -15,6 +15,9 @@ postRoute.post('/', (req, res) => {
     res.status(200).send('POST Route');
 })
 
+//        CRUD Operation
+
+//        Create & Read
 postRoute.post('/signUp', async (req, res) => {
     try {
         if (req.body.userName && req.body.password) {
@@ -54,6 +57,7 @@ postRoute.post('/signUp', async (req, res) => {
 
 })
 
+//      Read
 postRoute.post('/login', async (req, res) => {
     try {
         if (req.body.userName && req.body.password) {
@@ -85,5 +89,27 @@ postRoute.post('/login', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 })
+
+//      Update
+postRoute.post('/update', async (req, res) => {
+    try {
+        if (req.body.userName) {
+            const output = await userModel.findOne({ userName: req.body.userName });
+            if (!output) {
+                res.status(404).send("User Not Found");
+            } else {
+                output.password = req.body.password;
+                const updated_output = await output.save();
+                res.status(200).json({ msg: 'Updation Successfully', updated_output });
+            }
+        } else {
+            res.status(404).send('Username Not Received');
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).send('Internal Server Error');
+    }
+})
+
 
 module.exports = postRoute;

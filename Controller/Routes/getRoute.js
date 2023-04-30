@@ -17,15 +17,26 @@ getRoute.get('/', (req, res) => {
 })
 
 getRoute.get('/get_users', validation, async (req, res) => {
-    // const output = await userModel.findOne({})
-    console.log(req.headers.decoded_obj);
-    res.status(200).json({ msg: 'Users' })
+    const output = await userModel.find({});
+    const decoded_obj = req.headers.decoded_obj;
+    // console.log(decoded_obj);
+    res.status(200).json({
+        msg: 'Users',
+        decoded_obj,
+        users: output,
+    });
 })
 
-getRoute.get('/get_products', async (req, res) => {
-    const output = await productModel.find();
-    console.log(output);
-    res.status(200).send('Products');
+getRoute.get('/get_products', validation, async (req, res) => {
+    const output = await productModel.find({});
+    const decoded_obj = req.headers.decoded_obj;
+    // console.log(output);
+    res.status(200).json({
+        msg: 'Response',
+        decoded_obj,
+        products: output,
+
+    });
 })
 
 // function index(req,res){
